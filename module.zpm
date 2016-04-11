@@ -1,0 +1,181 @@
+<div class="zmodule_header" id="zmodule_header_<@ ModuleName @>"><img src="<@ ModuleIcon @>" border="0"><@ ModuleName @></div>
+<div class="zmodule_content" id="zmodule_header_<@ ModuleName @>">
+
+<div class="zmodule_desc" id="zmodule_desc_<@ ModuleName @>"><p><@ ModuleDesc @></p></div>
+    <@ Result @>
+
+    <% if isAddServer %>
+	<div class="zgrid_wrapper">
+		<h2>Add a new server</h2>
+		<form action="./?module=shoutcast_admin&action=SaveServer" method="post">
+		<table class="zgrid">
+			<tr valign="top">
+				<th nowrap="nowrap">Username : </th>
+				<td><input type="text" name="username" size="20" maxlenght="20" /></td>
+				<td>Username (on Sentora) can use this server</td>
+			</tr>	
+			<tr valign="top">
+				<th nowrap="nowrap">Port : </th>
+				<td><input type="text" name="port" size="5" maxlenght="5" value="8000"/></td>
+				<td>Port to use for server</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Max listeners : </th>
+				<td><input type="text" name="maxusers" size="5" maxlenght="5" value="100"/></td>
+				<td>Maximum users can listen on server</td>
+			</tr>			
+			<tr valign="top">
+				<th nowrap="nowrap">Admin Pass : </th>
+				<td><input type="text" name="pass_admin" size="8" maxlenght="8" value=""/></td>
+				<td>Password for administrator access</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">DJ Pass : </th>
+				<td><input type="text" name="pass_dj" size="8" maxlenght="8" value=""/></td>
+				<td>Password for streaming on server</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Allow relay : </th>
+				<td>
+					<input type="radio" name="relay" value="yes" checked="checked" /> Yes
+					<input type="radio" name="relay" value="no" /> No
+				</td>
+				<td>Allow relay from remote servers</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Allow public relay : </th>
+				<td>
+					<input type="radio" name="relay_public" value="yes" checked="checked" /> Yes
+					<input type="radio" name="relay_public" value="no" /> No				
+				</td>
+				<td>Allow server relay to be listed on SHOUTcast (is public server)</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Disconnect user limit : </th>
+				<td><input type="text" name="dump_user" size="10" maxlenght="10" value="0"/></td>
+				<td>Disconnect user from server after selected time in seconds</td>
+			</tr>			
+			<tr valign="top">
+				<th nowrap="nowrap">Disconnect source limit : </th>
+				<td><input type="text" name="dump_source" size="10" maxlenght="10" value="30"/></td>
+				<td>Disconnect the source from server selected time in seconds if no signal is receveid</td>
+			</tr>		
+			<tr>
+				<th colspan="3">
+				<button class="fg-button ui-state-default ui-corner-all" type="submit" id="button" name="inSaveSystem"><: Save Changes :></button>
+				</th>
+			</tr>
+		</table>
+		</form>
+	</div>
+	<% endif %>
+    <% if isEditServer %>
+	<div class="zgrid_wrapper">
+		<h2>Edit a new server</h2>
+		<form action="./?module=shoutcast_admin&action=SaveServer" method="post">
+		<table class="zgrid">
+			<tr valign="top">
+				<th nowrap="nowrap">Username : </th>
+				<td><input type="text" name="username" size="20" maxlenght="20" readonly value="<@ ThisUsername @>" /></td>
+				<td>Username (on zPanel) can use this server</td>
+			</tr>	
+			<tr valign="top">
+				<th nowrap="nowrap">Port : </th>
+				<td><input type="text" name="port" size="5" maxlenght="5" readonly value="<@ ThisPort @>"/></td>
+				<td>Port to use for server</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Max listeners : </th>
+				<td><input type="text" name="maxusers" size="5" maxlenght="5" value="<@ ThisMaxusers @>"/></td>
+				<td>Maximum users can listen on server</td>
+			</tr>			
+			<tr valign="top">
+				<th nowrap="nowrap">Admin Pass : </th>
+				<td><input type="text" name="pass_admin" size="8" maxlenght="8" value="<@ ThisAdminpass @>"/></td>
+				<td>Password for administrator access</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">DJ Pass : </th>
+				<td><input type="text" name="pass_dj" size="8" maxlenght="8" value="<@ ThisDJpass @>"/></td>
+				<td>Password for streaming on server</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Allow relay : </th>
+				<td>
+					<% if ThisRelay %>
+					<input type="radio" name="relay" value="yes" checked="checked" /> Yes
+					<input type="radio" name="relay" value="no" /> No
+					<% else %>
+					<input type="radio" name="relay" value="yes" /> Yes
+					<input type="radio" name="relay" value="no" checked="checked" /> No					
+					<% endif %>
+				</td>
+				<td>Allow relay from remote servers</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Allow public relay : </th>
+				<td>
+					<% if ThisRelaypublic %>
+					<input type="radio" name="relay_public" value="yes" checked="checked" /> Yes
+					<input type="radio" name="relay_public" value="no" /> No
+					<% else %>
+					<input type="radio" name="relay_public" value="yes" /> Yes
+					<input type="radio" name="relay_public" value="no" checked="checked" /> No					
+					<% endif %>				
+				</td>
+				<td>Allow server relay to be listed on SHOUTcast (is public server)</td>
+			</tr>
+			<tr valign="top">
+				<th nowrap="nowrap">Disconnect user limit : </th>
+				<td><input type="text" name="dump_user" size="10" maxlenght="10" value="<@ ThisDumpuser @>"/></td>
+				<td>Disconnect user from server after selected time in seconds</td>
+			</tr>			
+			<tr valign="top">
+				<th nowrap="nowrap">Disconnect source limit : </th>
+				<td><input type="text" name="dump_source" size="10" maxlenght="10" value="<@ ThisDumpsource @>"/></td>
+				<td>Disconnect the source from server selected time in seconds if no signal is receveid</td>
+			</tr>		
+			<tr>
+				<th colspan="3">
+				<button class="fg-button ui-state-default ui-corner-all" type="submit" id="button" name="inSaveSystem"><: Save Changes :></button>
+				</th>
+			</tr>
+		</table>
+		</form>
+	</div>
+	<% endif %>	
+	<div class="zgrid_wrapper">
+		<h2>Available servers</h2>
+		<form action="./?module=shoutcast_admin&action=AddServer" method="post">
+			<button class="fg-button ui-state-default ui-corner-all" type="submit" value="new" id="button" name="inAddServer">Add new server</button>
+		</form>
+		<table class="zgrid">
+			<tr valign="top">
+				<th nowrap="nowrap" style="min-width:120px;">Username</th>
+				<th align="center" style="text-align:center;" width="60">Port</th>
+				<th align="center" style="text-align:center;" width="60">Status</th>
+				<th align="center" style="text-align:center;">Tasks</th>
+			</tr>			
+			<% loop CurrentServersList %>
+			<form action="./?module=shoutcast_admin&action=TaskServer" method="post">
+			<tr valign="top">
+				<th nowrap="nowrap"><& username &></th>
+				<td align="center"><a href="http://<@ CurrentServerIP @>:<& port &>" target="_blank"><& port &></a></td>
+				<td align="center"><script src="./modules/shoutcast_admin/state.php?port=<& port &>"></script></td>
+				<td>
+					<input type="hidden" name="username" value="<& username &>" />
+					<input type="hidden" name="port" value="<& port &>" />
+					<button class="fg-button ui-state-default ui-corner-all" type="submit" value="kickServer" id="button" name="InTask">Kick Source</button>
+					<button class="fg-button ui-state-default ui-corner-all" type="submit" value="startServer" id="button" name="InTask">Start</button>
+					<button class="fg-button ui-state-default ui-corner-all" type="submit" value="stopServer" id="button" name="InTask">Stop</button>
+					<button class="fg-button ui-state-default ui-corner-all" type="submit" value="editServer" id="button" name="InTask">Edit</button>							
+					<button class="fg-button ui-state-default ui-corner-all" type="submit" value="deleteServer" id="button" name="InTask">Delete</button>				
+				</td>
+			</tr>	
+			</form>
+			<% endloop %>
+		</table>
+	</div>	
+	
+<div style="text-align: right"><small>SHOUTcast module for Sentora version 1.0 by Mathieu Légaré (levelkro@yahoo.ca) Updated for Sentora by TGates</small></div>
+</div>
