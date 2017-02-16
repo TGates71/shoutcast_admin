@@ -1,7 +1,12 @@
-<div class="zmodule_header" id="zmodule_header_<@ ModuleName @>"><img src="<@ ModuleIcon @>" border="0"><@ ModuleName @></div>
-<div class="zmodule_content" id="zmodule_header_<@ ModuleName @>">
-
-<div class="zmodule_desc" id="zmodule_desc_<@ ModuleName @>"><p><@ ModuleDesc @></p></div>
+<div class="zmodule_content panel" id="zmodule_header_<@ ModuleName @>">
+    <div class="panel-heading">
+        <img src="<@ ModuleIcon @>" width="35" height="35" border="0" alt="<@ ModuleName @>">
+        <div class="zmodule_title">
+            <@ ModuleName @>
+        </div>
+        <div class="zmodule_desc" id="zmodule_desc_<@ ModuleName @>"><@ ModuleDesc @>
+        </div>
+    </div>
     <@ Result @>
 
     <% if isAddServer %>
@@ -176,6 +181,6 @@
 			<% endloop %>
 		</table>
 	</div>	
-	
-<div style="text-align: right"><small>SHOUTcast module for Sentora version 1.0 by Mathieu Légaré (levelkro@yahoo.ca) Updated for Sentora by TGates</small></div>
+</div>
+<div style="text-align: right"><small>SHOUTcast module for Sentora version 1.0 by Mathieu Légaré (levelkro@yahoo.ca) Updated for Sentora by TGates (v1.0.1)</small></div>
 </div>

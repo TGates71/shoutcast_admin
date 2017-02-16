@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updateserver>
-	<latestversion>100</latestversion>
+	<latestversion>101</latestversion>
 	<downloadurl>http://zppy-repo.mach-hosting.com/repo/shoutcast_admin.zpp</downloadurl>
 	<desc>Manage SHOUTcast servers with Sentora. Admin module.</desc>
-	<updatedesc>Converted to Sentora.</updatedesc>
+	<updatedesc>Fixed Layout.</updatedesc>
 	<authorname>Mathieu Légaré</authorname>
 	<authoremail>levelkro@yahoo.ca</authoremail>
 	<authorurl>http://www.sentora.org</authorurl>
